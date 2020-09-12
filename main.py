@@ -22,16 +22,30 @@
 #### IMPORTS ####
 import datetime
 import random
+import json
 
 
 ######################
 #### HAUGHTY CORE ####
 class core:
 
-    def storeNewBofr(title, body):
-        date = datetime.datetime.now()
-        date_format = date.strftime("%Y%m%d")
-        return {"title": title, "body": body, "stamp": date_format,}
+    def storeNewTicket(ticket_data):
+        ID = generateNewID()
+        ticket_data["ID"] = ID
+        f = open("lib/db/" + ID, "w")
+        f.write(ticket_data)
+        f.close()
+        
+
+    def generateNewID():
+        f = open("lib/UIDs.csv", "r+")
+        UIDs = f.read()
+        UID = str(random.randrange(20000, 29999, 1))
+        while UID in UIDs:
+            UID = str(random.randrange(20000, 29999, 1))
+        f.write(UID + ",")
+        f.close()
+        return UID
 
 
 ###################
@@ -39,14 +53,4 @@ class core:
 class presenter:
 
     def newTicket(json_data):
-        f = open("lib/UIDs.csv")
-        UIDs = f.read()
-        UID = str(random.randrange(10, 99, 1))
-        while UID in UIDs:
-            UID = str(random.randrange(10, 99, 1))
-        json_data["UID"] = UID
-        f.close()
-        f = open("lib/UIDs.csv", "a")
-        f.write(UID + ",")
-        f.close()
-        return json_data
+
