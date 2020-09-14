@@ -22,7 +22,6 @@
 #### IMPORTS ####
 import datetime
 import random
-import json
 
 
 ######################
@@ -33,7 +32,8 @@ class core:
         ID = core.generateNewID()
         ticket_data["ID"] = ID
         f = open("lib/db/" + ID, "w")
-        f.write(ticket_data)
+        ticket = str(ticket_data)
+        f.write(ticket)
         f.close()
         
 
@@ -48,13 +48,10 @@ class core:
         return UID
 
 
+
 ###################
 #### PRESENTER ####
 class presenter:
 
     def newTicket(data):
-        if data["title"] == "":
-            core.invalidInput("title")
-        if data["body"] == "":
-            core.invalidInput("body")
         core.storeNewTicket(data)
