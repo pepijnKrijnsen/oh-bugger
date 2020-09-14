@@ -1,9 +1,9 @@
 import main
 from bottle import *
 
-@route("/")
-def serveHome():
-    return static_file("index.html", root = "./web")
+@route("/<filename>")
+def serveHome(filename):
+    return static_file(filename, root = "./web")
 
 @post("/store_new")
 def userSubmitsTicket():

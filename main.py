@@ -30,7 +30,7 @@ import json
 class core:
 
     def storeNewTicket(ticket_data):
-        ID = generateNewID()
+        ID = core.generateNewID()
         ticket_data["ID"] = ID
         f = open("lib/db/" + ID, "w")
         f.write(ticket_data)
@@ -52,5 +52,9 @@ class core:
 #### PRESENTER ####
 class presenter:
 
-    def newTicket(json_data):
-
+    def newTicket(data):
+        if data["title"] == "":
+            core.invalidInput("title")
+        if data["body"] == "":
+            core.invalidInput("body")
+        core.storeNewTicket(data)
