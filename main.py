@@ -19,6 +19,7 @@
 #### IMPORTS ####
 import datetime
 import random
+import time
 
 
 ######################
@@ -28,6 +29,11 @@ class core:
     def storeNewTicket(ticket_data):
         ID = core.generateNewID()
         ticket_data["ID"] = ID
+        now = datetime.datetime.now()
+        ticket_data["created_on"] = now.strftime("%Y%m%d")
+        ticket_data["created_at"] = now.strftime("%H:%M")
+        ticket_data["birth_second"] = int(time.time())
+        ticket_data["last_modified"] = int(time.time())
         f = open("lib/db/" + ID, "w")
         ticket = str(ticket_data)
         f.write(ticket)
