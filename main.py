@@ -4,9 +4,6 @@
 # Haughty core:
 #   business logic
 # 
-# Entity: database:
-#   stores and retrieves tickets
-# 
 # Presenter:
 #   Prepares data for output by the view
 # 
